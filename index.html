@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吴沁蝈 | AI工程师作品集</title>
+    <meta name="description" content="高级AI工程师作品集 - 简约、专业、前沿">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #a78bfa;
+            --primary-dark: #6d28d9;
+            --dark: #0f0e17;
+            --gray: #646464;
+            --light: #ffffff;
+            --card-bg: #1a1a1d;
+            --border: #2d2d2d;
+            --success: #06b6d4;
+            --text: #e6e6e6;
+            --text-light: #a3a3a3;
+            --shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        header {
+            padding: 80px 0 60px;
+            position: relative;
+        }
+        
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .avatar::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            top: -25%;
+            left: -25%;
+        }
+        
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.025em;
+            background: linear-gradient(90deg, var(--light), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            max-width: 650px;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+            gap: 10px;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .contact-link:hover {
+            color: var(--primary-light);
+        }
+        
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .contact-link:hover::after {
+            width: 100%;
+        }
+        
+        section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        section:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        
+        section:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        
+        section:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+        
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 35px;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            height: 100%;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
+        }
+        
+        .project-image {
+            height: 240px;
+            background: linear-gradient(45deg, #2d2d2d, #1a1a1d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .project-image-placeholder {
+            font-size: 4rem;
+            color: var(--primary-light);
+            opacity: 0.2;
+        }
+        
+        .project-content {
+            padding: 30px;
+        }
+        
+        .project-type {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--primary-light);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: 0.02em;
+        }
+        
+        .project-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+        }
+        
+        .project-desc {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .tech-tag {
+            background: rgba(26, 26, 29, 0.7);
+            color: var(--primary-light);
+            padding: 6px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(4px);
+            transition: var(--transition);
+        }
+        
+        .tech-tag:hover {
+            background: rgba(124, 58, 237, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 18px;
+            margin-top: 20px;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+            gap: 10px;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+            font-size: 1.05rem;
+        }
+        
+        .project-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            color: var(--primary-light);
+        }
+        
+        .project-link:hover::after {
+            width: 100%;
+        }
+        
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-category {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            height: 100%;
+        }
+        
+        .skill-category:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-category h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.01em;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.05rem;
+        }
+        
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-name {
+            color: var(--light);
+            font-weight: 500;
+        }
+        
+        .skill-level {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .experience-section {
+            position: relative;
+        }
+        
+        .experience-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+            left: 30px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 70px;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 23px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--card-bg);
+            z-index: 10;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .timeline-date {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--primary-light);
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+        }
+        
+        .timeline-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--light);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        
+        .timeline-company {
+            color: var(--primary-light);
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 1.15rem;
+            display: block;
+        }
+        
+        .timeline-desc {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 60px 0;
+            margin: 80px 0;
+            background: linear-gradient(135deg, rgba(26, 26, 29, 0.7), rgba(15, 15, 23, 0.9));
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.05), transparent 30%);
+            pointer-events: none;
+        }
+        
+        .cta-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: var(--light);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-text {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+        
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 18px 45px;
+            border-radius: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.2rem;
+            gap: 14px;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4);
+            border: 1px solid rgba(124, 58, 237, 0.5);
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.6s;
+        }
+        
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px -5px rgba(124, 58, 237, 0.5);
+            background: linear-gradient(90deg, var(--primary-dark), #5b21b6);
+        }
+        
+        .cta-btn:active {
+            transform: translateY(1px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 50px 0 80px;
+            color: var(--text-light);
+            font-size: 1.05rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        footer a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .highlight {
+            color: var(--primary-light);
+            position: relative;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(124, 58, 237, 0.2);
+            z-index: -1;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .experience-timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                padding-left: 60px;
+            }
+            
+            .timeline-dot {
+                left: 13px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            header {
+                padding: 60px 0 40px;
+            }
+            
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-links {
+                gap: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .avatar {
+                width: 130px;
+                height: 130px;
+                font-size: 50px;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 400px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile">
+                <div class="avatar">Seek</div>
+                <h1>吴沁蝈</h1>
+                <p class="tagline">高级机器学习工程师 · 专注于AI系统设计与落地 · 用技术创造商业价值</p>
+                <div class="contact-links">
+                    <a href="mailto:hardtohard_ai@foxmial.com" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        hardtohard_ai@foxmial.com
+                    </a>
+                    <a href="https://github.com/hardtohard-ai" class="contact-link" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.333 2.333 0 015.186 7.23c-.38.054-.757.11-1.134.166a.958.958 0 00-.794.252 1.007 1.007 0 00-.363.63L1.304 13H3a.806.806 0 01.792.596l-.54.9-1.442 2.402A1.125 1.125 0 001.624 18h.001v.006a.807.807 0 00.237.55 1.125 1.125 0 001.144.27l.2-.068a.807.807 0 01.595-.064L5 18.123v-4.5a.38.38 0 01.38-.38.373.373 0 01.252.11L8 15.58l1.874-1.249a.373.373 0 01.252-.11.38.38 0 01.38.38v4.5l2.148-.716a1.128 1.128 0 00.698-.698L15 18.123v-4.5a.38.38 0 01.38-.38.373.373 0 01.252.11L18 15.58l1.874-1.249a.373.373 0 01.252-.11.38.38 0 01.38.38v4.5a1.128 1.128 0 001.126 1.126h.001l.17-.008a.807.807 0 00.55-.237A1.125 1.125 0 0021 18.375v-.006l.004-.019a.807.807 0 00-.064-.595l-.068-.2A1.125 1.125 0 0020.27 16H8.303a.806.806 0 01-.596-.792L7.64 13.88l-4.44-2.563a.958.958 0 00-.252-.794A2.335 2.335 0 012.78 9.172c0-.56.2-.1.497-.174A2.33 2.33 0 015.186 8.77c.38-.056.757-.111 1.134-.166.326-.054.65-.11.97-.166.387-.067.77-.14 1.15-.22.326-.07.65-.143.968-.22a2.33 2.33 0 001.906-2.195c.013-.172.022-.344.027-.517a3.125 3.125 0 014.145-.02 2.33 2.33 0 001.906 2.195c.318.077.642.15.968.22.38.08.763.153 1.15.22.32.056.644.11.97.166.377.055.754.11 1.134.166a2.333 2.333 0 011.641 1.055c.135.23.257.467.363.71.05.115.094.233.134.352.041.12.077.242.108.365.03.118.057.237.078.357.022.125.04.25.053.375a3.125 3.125 0 01-3.125 3.126h-.001v.005a1.125 1.125 0 00-.802.337l-.002.002a1.121 1.121 0 00-.335.8l-.001.056v1.125h.001a3.125 3.125 0 01-3.125 3.125h-.001v.005a1.125 1.125 0 00-.802.337l-.002.002a1.121 1.121 0 00-.335.8l-.001.056v1.125h.001a3.125 3.125 0 01-3.125 3.125h-.001a1.128 1.128 0 00-1.127 1.126v.006a.807.807 0 00.237.55 1.125 1.125 0 001.144.27l.2-.068a.807.807 0 01.595-.064L12 21.125v-4.5a.38.38 0 01.38-.38.373.373 0 01.252.11L15 18.58l1.874-1.249a.373.373 0 01.252-.11.38.38 0 01.38.38v4.5l2.148-.716a1.128 1.128 0 00.698-.698L21 21.125v-4.5a.38.38 0 01.38-.38.373.373 0 01.252.11L24 18.58v2.52a3.125 3.125 0 01-3.125 3.125h-.001v.005a1.125 1.125 0 00-.802.337l-.002.002a1.121 1.121 0 00-.335.8l-.001.056v1.125h-.001a3.125 3.125 0 01-3.125 3.125h-.001a1.128 1.128 0 00-1.127 1.126v.006a.807.807 0 00.237.55 1.125 1.125 0 001.144.27l.2-.068a.807.807 0 01.595-.064L19.5 24" />
+                        </svg>
+                        github.com/hardtohard-ai
+                    </a>
+
+                </div>
+            </div>
+        </header>
+        
+        <section>
+            <h2>精选项目</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">AI</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-type">计算机视觉</span>
+                        <h3 class="project-title">智能零售视觉分析系统</h3>
+                        <p class="project-desc">
+                            设计并实现端到端的视觉分析系统，用于大型商超的顾客行为分析与商品识别，替代传统人工巡检流程，提升运营效率。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">YOLOv5</span>
+                            <span class="tech-tag">TensorRT</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Kubernetes</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <span>案例研究</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                </svg>
+                            </a>
+                            <a href="#" class="project-link">
+                                <span>技术文档</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">AI</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-type">推荐系统</span>
+                        <h3 class="project-title">个性化内容推荐引擎</h3>
+                        <p class="project-desc">
+                            构建混合推荐系统，融合深度学习与传统算法，提升用户留存率22%，内容消费时长增加31%，支撑千万级DAU产品。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">Spark</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">Kafka</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <span>性能分析</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                </svg>
+                            </a>
+                            <a href="#" class="project-link">
+                                <span>架构设计</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">AI</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-type">NLP</span>
+                        <h3 class="project-title">金融智能投研助手</h3>
+                        <p class="project-desc">
+                            开发基于大语言模型的金融分析系统，实现研报自动生成与关键信息提取，在专业测试中达到92%的准确率，提升分析师工作效率。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">LLM</span>
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">Hugging Face</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <span>产品演示</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                </svg>
+                            </a>
+                            <a href="#" class="project-link">
+                                <span>技术白皮书</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>专业能力</h2>
+            
+            <div class="skills-section">
+                <div class="skill-category">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.55-1.55L13.5 18.75l1.183-.394a2.25 2.25 0 001.55-1.55L16.5 15.75l.394 1.183a2.25 2.25 0 001.55 1.55z" />
+                        </svg>
+                        核心技术栈
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span class="skill-name">深度学习框架</span>
+                            <span class="skill-level">PyTorch, TensorFlow, Keras</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">编程语言</span>
+                            <span class="skill-level">Python, SQL, JavaScript</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">云平台</span>
+                            <span class="skill-level">AWS, GCP, Azure</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">部署与运维</span>
+                            <span class="skill-level">Docker, Kubernetes, CI/CD</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">数据处理</span>
+                            <span class="skill-level">Pandas, Spark, SQL</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L21 12l-8.25 8.25-10.5-11.25zM17.25 1.5a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                        </svg>
+                        专业领域
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span class="skill-name">计算机视觉</span>
+                            <span class="skill-level">目标检测 · 图像分割 · 视频分析</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">推荐系统</span>
+                            <span class="skill-level">召回 · 排序 · 重排 · AB测试</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">自然语言处理</span>
+                            <span class="skill-level">文本分类 · 信息抽取 · LLM应用</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">MLOps</span>
+                            <span class="skill-level">模型部署 · 监控 · 版本管理</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">数据工程</span>
+                            <span class="skill-level">数据管道 · 特征存储 · 实时处理</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        项目经验
+                    </h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span class="skill-name">端到端项目交付</span>
+                            <span class="skill-level">7+ 从0到1的AI系统</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">高并发系统</span>
+                            <span class="skill-level">支撑千万级DAU产品</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">性能优化</span>
+                            <span class="skill-level">推理速度提升3-5倍</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">跨团队协作</span>
+                            <span class="skill-level">与产品、运营深度合作</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-name">技术领导力</span>
+                            <span class="skill-level">指导3人AI团队</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="experience-section">
+            <h2>职业经历</h2>
+            
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2021.07 - 至今</span>
+                    <h3 class="timeline-title">高级机器学习工程师</h3>
+                    <span class="timeline-company">创新科技有限公司</span>
+                    <p class="timeline-desc">
+                        领导核心AI团队，负责公司主要产品的算法架构设计与实现，推动AI技术在业务中的深度应用，实现技术到商业价值的转化。
+                        <br><br>
+                        • 设计并实现新一代推荐系统，融合深度学习与图神经网络，提升用户留存率22%，内容消费时长增加31%
+                        <br>
+                        • 优化模型推理性能，通过TensorRT和模型压缩技术，将推理延迟降低65%，节省30%计算成本
+                        <br>
+                        • 建立MLOps体系，实现模型从开发到部署的全流程自动化，模型迭代周期从2周缩短至3天
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2019.03 - 2021.06</span>
+                    <h3 class="timeline-title">机器学习工程师</h3>
+                    <span class="timeline-company">数据驱动科技公司</span>
+                    <p class="timeline-desc">
+                        负责多个AI项目的开发与实施，从需求分析到模型部署全流程参与，解决客户实际业务问题。
+                        <br><br>
+                        • 开发智能客服对话系统，准确率提升至85%，替代40%人工客服工作量
+                        <br>
+                        • 构建用户画像系统，支持精准营销，提升营销转化率18%
+                        <br>
+                        • 为金融客户提供风控模型，AUC达到0.89，年降低坏账损失$2.3M
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2017.06 - 2019.02</span>
+                    <h3 class="timeline-title">数据科学家</h3>
+                    <span class="timeline-company">互联网科技公司</span>
+                    <p class="timeline-desc">
+                        负责数据分析与建模工作，支持产品决策与业务增长。
+                        <br><br>
+                        • 开发用户行为预测模型，支持产品功能优化，提升核心指标15%
+                        <br>
+                        • 构建AB测试框架，支持产品快速迭代，实验效率提升50%
+                        <br>
+                        • 分析用户流失原因，提出改进方案，降低月度流失率8%
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta-section">
+            <h2 class="cta-title">让我们共同创造AI驱动的未来</h2>
+            <p class="cta-text">
+                我期待与顶尖团队合作，将前沿AI技术转化为实际业务价值。如果您正在寻找能够<span class="highlight">从0到1构建AI系统</span>、<span class="highlight">解决复杂技术挑战</span>的工程师，我很乐意进一步交流。
+            </p>
+            <a href="#" class="cta-btn">
+                <span>预约技术交流</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
+            </a>
+        </section>
+        
+        <footer>
+            <p>© 2025 吴沁蝈的AI作品集 | 专为技术面试打造的高端作品集</p>
+            <p style="margin-top: 10px;">
+                本作品集已通过GitHub Pages部署<br>
+                <span style="color: var(--primary-light); word-break: break-all;">https://hardtohard-ai.github.io/portfolio</span>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // 简单的滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0.1s';
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

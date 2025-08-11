@@ -1,2 +1,2 @@
-# CinguoNg.github.io
+# CinguoNg
 Personal job-seeking resume page
